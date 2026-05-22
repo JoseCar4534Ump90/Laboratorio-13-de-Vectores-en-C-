@@ -1,0 +1,56 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main() {
+    const int TOTAL_DIAS = 15;
+    vector<double> temperaturas(TOTAL_DIAS);
+    
+    double sumaTemperaturas = 0; // Variable Acumuladora
+    int diasFrios = 0;           // Contador (menores a 10 grados)
+
+    // Registro de temperaturas
+    for (int i = 0; i < TOTAL_DIAS; i++) {
+        cout << "Ingrese la temperatura del dia " << i + 1 << ": ";
+        cin >> temperaturas[i];
+        
+        sumaTemperaturas += temperaturas[i]; // Acumulando
+
+        if (temperaturas[i] < 10) {
+            diasFrios++; // Contando dias menores a 10 grados
+        }
+    }
+
+    double promedio = sumaTemperaturas / TOTAL_DIAS;
+    double maxTemp = temperaturas[0];
+    double minTemp = temperaturas[0];
+
+    cout << "\n--- Reporte de datos registrados ---\n";
+    for (int i = 0; i < TOTAL_DIAS; i++) {
+        cout << "Dia " << i + 1 << ": " << temperaturas[i] << " C\n";
+        
+        if (temperaturas[i] > maxTemp) maxTemp = temperaturas[i];
+        if (temperaturas[i] < minTemp) minTemp = temperaturas[i];
+    }
+
+    // Contador para los dias que superaron el promedio general
+    int diasSobrePromedio = 0;
+    for (int i = 0; i < TOTAL_DIAS; i++) {
+        if (temperaturas[i] > promedio) {
+            diasSobrePromedio++;
+        }
+    }
+
+    // Mostrar resultados de forma organizada
+    cout << "\n====================================\n";
+    cout << "       REPORTE METEOROLOGICO\n";
+    cout << "====================================\n";
+    cout << "Temperatura maxima registrada: " << maxTemp << " C\n";
+    cout << "Temperatura minima registrada: " << minTemp << " C\n";
+    cout << "Promedio general:              " << promedio << " C\n";
+    cout << "Dias con temperatura superior al promedio: " << diasSobrePromedio << "\n";
+    cout << "Dias con temperatura inferior a 10 C:     " << diasFrios << "\n";
+
+    return 0;
+}
