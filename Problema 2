@@ -1,0 +1,59 @@
+#include <iostream>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+int main() {
+    const int DIAS = 7;
+    // Vector auxiliar para manejar los nombres de los dias
+    vector<string> nombresDias = {"Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"};
+    vector<double> ventas(DIAS);
+    double totalVendido = 0;
+
+    // Registro de ventas de la semana
+    for (int i = 0; i < DIAS; i++) {
+        cout << "Ingrese las ventas del dia " << nombresDias[i] << ": ";
+        cin >> ventas[i];
+        totalVendido += ventas[i];
+    }
+
+    double promedio = totalVendido / DIAS;
+    
+    // Buscar el dia con mayor y menor venta
+    double maxVenta = ventas[0];
+    double minVenta = ventas[0];
+    int indiceMayor = 0;
+    int indiceMenor = 0;
+
+    for (int i = 0; i < DIAS; i++) {
+        if (ventas[i] > maxVenta) {
+            maxVenta = ventas[i];
+            indiceMayor = i;
+        }
+        if (ventas[i] < minVenta) {
+            minVenta = ventas[i];
+            indiceMenor = i;
+        }
+    }
+
+    // Contar cuantos dias superaron el promedio
+    int diasSuperiores = 0;
+    for (int i = 0; i < DIAS; i++) {
+        if (ventas[i] > promedio) {
+            diasSuperiores++;
+        }
+    }
+
+    // Mostrar resultados organizados
+    cout << "\n====================================\n";
+    cout << "    ANALISIS DE VENTAS SEMANALES\n";
+    cout << "====================================\n";
+    cout << "Total vendido en la semana: " << totalVendido << "\n";
+    cout << "Promedio diario de ventas:  " << promedio << "\n";
+    cout << "Dia con mayor venta:        " << nombresDias[indiceMayor] << " (" << maxVenta << ")\n";
+    cout << "Dia con menor venta:        " << nombresDias[indiceMenor] << " (" << minVenta << ")\n";
+    cout << "Dias con ventas superiores al promedio: " << diasSuperiores << "\n";
+
+    return 0;
+}
